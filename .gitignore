@@ -3,3 +3,5 @@
 ################################################################################
 
 /MSI Info/obj
+/.vs/MSI Info
+/MSI Info/bin/Release/netcoreapp3.1

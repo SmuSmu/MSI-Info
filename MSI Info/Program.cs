@@ -45,18 +45,21 @@ namespace MSI_Info
                 //ProductVersion = record.get_StringData(1).ToString();
                 Console.WriteLine(record.get_StringData(1).ToString());
 
+
+                Console.WriteLine("[Property]");
                 //Get Product Name
-                dv = db.OpenView("SELECT `Value` FROM `Property` WHERE `Property`='ProductName'");
+                dv = db.OpenView("SELECT `Property`, `Value` FROM `Property`");
 
                 record = null;
 
                 dv.Execute(record);
 
+
                 record = dv.Fetch();
 
                 //ProductName = record.get_StringData(1).ToString();
 
-                Console.WriteLine(record.get_StringData(1).ToString());
+                Console.WriteLine(record.get_StringData(1).ToString() + "=" + record.get_StringData(2).ToString());
             }
 
         }

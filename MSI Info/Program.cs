@@ -22,7 +22,7 @@ namespace MSI_Info
 
                 Activator.CreateInstance(type);
 
-                WindowsInstaller.Database db = null;
+                WindowsInstaller.Database db;
 
                 try
                 {
@@ -30,38 +30,20 @@ namespace MSI_Info
                 }
                 catch (Exception e)
                 {
-                    throw new Exception("File does not exist or is not accessible");
+                    throw new Exception("File does not exist or is not accessible", e);
                 }
 
-                //Get Product Version
-                WindowsInstaller.View dv = db.OpenView("SELECT `Value` FROM `Property` WHERE `Property`='ProductVersion'");
-
-                WindowsInstaller.Record record = null;
-
-                dv.Execute(record);
-
-                record = dv.Fetch();
-
-                //ProductVersion = record.get_StringData(1).ToString();
-                Console.WriteLine(record.get_StringData(1).ToString());
-
-
                 Console.WriteLine("[Property]");
-                //Get Product Name
-                dv = db.OpenView("SELECT `Property`, `Value` FROM `Property`");
+                WindowsInstaller.View dv = db.OpenView("SELECT `Property`, `Value` FROM `Property`");
 
-                record = null;
+                dv.Execute();
 
-                dv.Execute(record);
-
-
-                record = dv.Fetch();
-
-                //ProductName = record.get_StringData(1).ToString();
-
-                Console.WriteLine(record.get_StringData(1).ToString() + "=" + record.get_StringData(2).ToString());
+                for (WindowsInstaller.Record row; (row = dv.Fetch()) != null; )
+                {
+                    Console.WriteLine(row.get_StringData(1).ToString() + "=" + row.get_StringData(2).ToString());
+                }
             }
-
         }
     }
 }
+ 

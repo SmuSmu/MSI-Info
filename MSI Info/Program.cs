@@ -26,8 +26,7 @@ namespace MSI_Info
 
                 try
                 {
-                    db = installer.OpenDatabase("C:\\Users\\Jean\\Downloads\\Proximity.msi", 0);
-                    //db = installer.OpenDatabase("Proximity.msi", 0);
+                    db = installer.OpenDatabase("..\\..\\..\\..\\TestFile\\IPFilter.msi", 0);
                 }
                 catch (Exception e)
                 {
